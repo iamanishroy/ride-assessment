@@ -1,0 +1,86 @@
+@use "./../../styles/util/colors" as c;
+
+.main {
+  padding: 12px 42px;
+
+  .interactions {
+    padding: 24px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    .left {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      button {
+        background: transparent;
+        border: 0;
+        color: c.$text1;
+
+        &[data-active="true"] {
+          color: c.$text2 !important;
+          border-bottom: 1px solid c.$text2;
+          font-weight: 600;
+        }
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+
+    .right {
+      display: flex;
+      gap: 8px;
+      color: c.$text1;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    .filterBox {
+      position: absolute;
+      right: 0;
+      top: 80%;
+      z-index: 1;
+      width: 200px;
+      border-radius: 12px;
+      background: c.$dark1;
+      padding: 24px;
+      color: c.$text1;
+      display: none;
+
+      &[data-show="true"] {
+        display: unset;
+      }
+
+      hr {
+        margin: 12px 0;
+        height: 1px;
+        background: c.$text1;
+      }
+
+      button {
+        background: c.$background;
+        width: 100%;
+        text-align: left;
+        padding: 8px 12px;
+        color: c.$text1;
+        border: 0;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        &:last-child {
+          margin-top: 12px;
+        }
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

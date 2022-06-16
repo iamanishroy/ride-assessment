@@ -1,0 +1,29 @@
+@use "./../../styles/util/colors" as c;
+
+.nav {
+  padding: 12px 42px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .brand {
+    color: c.$text2;
+    font-size: 1.6rem;
+  }
+
+  .user {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+
+    p {
+      font-weight: 500;
+      color: c.$text2;
+    }
+
+    img {
+      height: 40px;
+      border-radius: 50%;
+    }
+  }
+}

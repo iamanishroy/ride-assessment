@@ -1,0 +1,15 @@
+@use "./../../styles/util/colors" as c;
+
+$nav-height: 60px;
+
+.body {
+  background: c.$background;
+  nav {
+    height: $nav-height;
+    width: 100%;
+    background-color: c.$dark1;
+  }
+  main {
+    height: calc(100vh - $nav-height);
+  }
+}
