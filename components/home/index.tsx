@@ -1,8 +1,7 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { Ride } from "../../utility/interface";
 import Card from "./card";
 import FilterIcon from "./static/filterIcon";
-import TriangleIcon from "./static/triangleIcon";
 import styles from './styles.module.scss';
 
 interface RidesData {
@@ -14,8 +13,8 @@ interface RidesData {
 const Homepage: React.FC<{ userStation: number, ridesData: RidesData }> = ({ userStation, ridesData: { rides: _rides, filterOptions = {}, pastCount } }) => {
   const [rides, setRides] = useState<Ride[]>(_rides);
   const [tab, setTab] = useState<number>(0);
-  const [filterState, setFilterState] = useState<string | null>(null);
-  const [filterCity, setFilterCity] = useState<string | null>(null);
+  const [filterState, setFilterState] = useState<string>('state');
+  const [filterCity, setFilterCity] = useState<string>('city');
 
   useEffect(() => {
     if (tab === 1) {
@@ -27,11 +26,14 @@ const Homepage: React.FC<{ userStation: number, ridesData: RidesData }> = ({ use
   }, [tab]);
 
   useEffect(() => {
-    if (filterCity) {
-      return setRides(_rides.filter((ride: Ride) => ride.city === filterCity))
+    setRides(_rides);
+    if (filterState !== 'state') {
+      setRides(_rides.filter((ride: Ride) => ride.state === filterState));
     }
-    return setRides(_rides);
-  }, [filterCity]);
+    if (filterCity !== 'city') {
+      setRides(_rides.filter((ride: Ride) => ride.city === filterCity));
+    }
+  }, [filterCity, filterState]);
 
   return (
     <main className={styles.main}>
@@ -54,23 +56,26 @@ const Homepage: React.FC<{ userStation: number, ridesData: RidesData }> = ({ use
             Filters
             <hr />
             <div className={styles.filterOption}>
-              <button>State <TriangleIcon /></button>
-              <ul>
+              <select onChange={(e) => {
+                setFilterState(e.target.value)
+                setFilterCity('city')
+              }} defaultValue='state'>
+                <option value='state' key='state'>no state</option>
                 {Object.keys(filterOptions || {}).map(state =>
-                  <li data-selected={state === filterState} key={state} onClick={() => setFilterState(state)}>{state}</li>
+                  <option value={state} key={state}>{state}</option>
                 )}
-              </ul>
+              </select>
             </div>
-            <div className={styles.filterOption}>
-              <button>City <TriangleIcon /></button>
-              <ul>
-                {filterOptions !== null && filterState &&
-                  filterOptions[filterState || ""]?.map((city: string) =>
-                    <li data-selected={city === filterCity} key={city} onClick={() => setFilterCity(city)}>{city}</li>
-                  )
-                }
-              </ul>
-            </div>
+            {filterState !== 'state' &&
+              <div className={styles.filterOption}>
+                <select onChange={(e) => setFilterCity(e.target.value)} defaultValue='city'>
+                  <option value='city' key='city'>no city</option>
+                  {filterOptions[filterState || ""]?.map((city: string) =>
+                    <option value={city} key={city}>{city}</option>
+                  )}
+                </select>
+              </div>
+            }
           </div>
         </div>
       </div>

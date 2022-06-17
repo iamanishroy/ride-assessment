@@ -38,13 +38,14 @@
         color: c.$text1;
         background: transparent;
         border: 0;
+        &:hover {
+          cursor: pointer;
+        }
       }
 
-      &:hover {
-        cursor: pointer;
-        & .filterBox {
-          display: unset;
-        }
+      &:focus-within .filterBox,
+      button:focus + .filterBox {
+        display: unset;
       }
 
       .filterBox {
@@ -66,7 +67,7 @@
         }
 
         .filterOption {
-          button {
+          select {
             background: c.$background;
             width: 100%;
             text-align: left;
@@ -85,33 +86,6 @@
 
           &:last-child {
             margin-top: 12px;
-          }
-
-          &:hover ul {
-            display: unset;
-          }
-          ul {
-            background: c.$dark2;
-            padding: 12px 6px;
-            border-radius: 6px;
-            position: absolute;
-            list-style-type: none;
-            border: 0.5px solid;
-            max-height: 400px;
-            overflow-y: scroll;
-            display: none;
-
-            li {
-              padding: 6px 12px;
-              border-radius: 4px;
-              &:hover {
-                background: c.$dark1;
-              }
-
-              &[data-selected="true"] {
-                background: c.$dark1;
-              }
-            }
           }
         }
       }
