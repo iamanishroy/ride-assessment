@@ -5,8 +5,13 @@ import FilterIcon from "./static/filterIcon";
 import TriangleIcon from "./static/triangleIcon";
 import styles from './styles.module.scss';
 
+interface RidesData {
+  rides: Ride[]
+  filterOptions: { [key: string]: string[] }
+  pastCount: number
+}
 
-const Homepage: React.FC<{ userStation: number, rides: Ride[], filterOptions: { [key: string]: string[] } }> = ({ rides: _rides, userStation, filterOptions = {} }) => {
+const Homepage: React.FC<{ userStation: number, ridesData: RidesData }> = ({ userStation, ridesData: { rides: _rides, filterOptions = {}, pastCount } }) => {
   const [rides, setRides] = useState<Ride[]>(_rides);
   const [tab, setTab] = useState<number>(0);
   const [filterState, setFilterState] = useState<string | null>(null);
@@ -34,8 +39,8 @@ const Homepage: React.FC<{ userStation: number, rides: Ride[], filterOptions: { 
         {/* left */}
         <div className={styles.left}>
           <button data-active={tab === 0} onClick={() => setTab(0)}>Nearest rides</button>
-          <button data-active={tab === 1} onClick={() => setTab(1)}>Upcoming rides (4)</button>
-          <button data-active={tab === 2} onClick={() => setTab(2)}>Past rides (2)</button>
+          <button data-active={tab === 1} onClick={() => setTab(1)}>Upcoming rides ({_rides.length - pastCount})</button>
+          <button data-active={tab === 2} onClick={() => setTab(2)}>Past rides ({pastCount})</button>
         </div>
 
         {/* right */}
