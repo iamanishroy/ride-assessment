@@ -1,16 +1,18 @@
+import { Ride } from "../../utility/interface";
 import Card from "./card";
 import FilterIcon from "./static/filterIcon";
 import TriangleIcon from "./static/triangleIcon";
 import styles from './styles.module.scss';
 
-const Homepage: React.FC = () => {
+
+const Homepage: React.FC<{ userStation: number, rides: Ride[] }> = ({ rides, userStation }) => {
   return (
     <main className={styles.main}>
       <div className={styles.interactions}>
         {/* left */}
         <div className={styles.left}>
-          <button>Nearest rides</button>
-          <button data-active="true">Upcoming rides (4)</button>
+          <button data-active="true">Nearest rides</button>
+          <button>Upcoming rides (4)</button>
           <button>Past rides (2)</button>
         </div>
 
@@ -20,7 +22,7 @@ const Homepage: React.FC = () => {
           Filter
         </div>
 
-        <div className={styles.filterBox} data-show>
+        <div className={styles.filterBox} data-sho>
           Filters
           <hr />
           <button>State <TriangleIcon /></button>
@@ -29,8 +31,8 @@ const Homepage: React.FC = () => {
       </div>
 
       {/* card container */}
-      <div>
-        <Card />
+      <div className={styles.cardContainer}>
+        {rides.map(ride => <Card ride={ride} userStation={userStation} key={ride.id} />)}
       </div>
     </main>
   );

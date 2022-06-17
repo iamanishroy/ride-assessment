@@ -4,14 +4,15 @@
   padding: 12px 42px;
 
   .interactions {
-    padding: 24px 0;
+    // padding: 24px 0;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     position: relative;
     .left {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+      display: flex;
+      gap: 18px;
       button {
         background: transparent;
         border: 0;
@@ -19,7 +20,7 @@
 
         &[data-active="true"] {
           color: c.$text2 !important;
-          border-bottom: 1px solid c.$text2;
+          border-bottom: 2px solid c.$text2;
           font-weight: 600;
         }
 
@@ -82,5 +83,11 @@
         }
       }
     }
+  }
+  .cardContainer {
+    display: grid;
+    row-gap: 16px;
+    height: calc(100% - 60px);
+    overflow-y: scroll;
   }
 }

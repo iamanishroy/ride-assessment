@@ -1,16 +1,18 @@
+import { User } from '../../utility/interface';
 import Navbar from '../navbar';
 import styles from './styles.module.scss';
 
 interface LayoutPropInterface {
+  user: User
   main: React.ReactNode
 }
 
-const Layout: React.FC<LayoutPropInterface> = ({ main }): JSX.Element => {
+const Layout: React.FC<LayoutPropInterface> = ({ user, main }): JSX.Element => {
   return (
-    <body className={styles.body}>
-      <Navbar />
+    <div className={styles.body}>
+      <Navbar user={user} />
       {main}
-    </body>
+    </div>
   );
 };
 
