@@ -11,7 +11,6 @@ date.plugin(ordinal);
  */
 
 const Card: React.FC<{ ride: Ride, userStation: number }> = ({ ride, userStation }) => {
-
     return (
         <div className={styles.card} key={ride.id}>
             <img src="https://picsum.photos/200" />

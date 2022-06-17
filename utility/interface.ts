@@ -9,6 +9,7 @@ export interface Ride {
   city: string;
   closest_station: number;
   distance: number;
+  past: boolean;
 }
 
 export interface User {
